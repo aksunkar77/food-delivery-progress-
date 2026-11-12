@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}Главная — BiteBox{% endblock %}
+
+{% block content %}
+
+<style>
+  .home {
+    color: #303236;
+  }
+
+  .banner {
+    background: #eeeeee;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 30px;
+  }
+
+  .banner h1 {
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  .banner p {
+    color: #666;
+    margin: 15px 0 25px;
+  }
+
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 20px 0 30px;
+  }
+
+  .category {
+    background: #f1f1f1;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+  }
+
+  .category.active {
+    background: #343a40;
+    color: white;
+  }
+
+  .restaurant {
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    overflow: hidden;
+    height: 100%;
+  }
+
+  .restaurant-cover {
+    background: #eeeeee;
+    padding: 40px 15px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  .restaurant-info {
+    padding: 20px;
+  }
+
+  .restaurant-info h3 {
+    font-size: 22px;
+  }
+
+  .restaurant-info p {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .restaurant-info summary {
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+  .restaurant-info ul {
+    padding-left: 20px;
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  @media (max-width: 576px) {
+    .banner {
+      padding: 25px;
+    }
+
+    .banner h1 {
+      font-size: 29px;
+    }
+  }
+</style>
+
+<div class="home">
+
+  <section class="banner">
+    <p>BITEBOX · АЛМАТЫ</p>
+
+    <h1>
+      Любимые блюда.<br>
+      Из ресторанов рядом.
+    </h1>
+
+    <p>Выберите ресторан и найдите что-нибудь вкусное.</p>
+
+    <a href="#restaurants" class="btn btn-dark">
+      Выбрать ресторан
+    </a>
+  </section>
+
+  <h2 class="h4">Что хочется сегодня?</h2>
+
+  <div class="categories" aria-label="Категории ресторанов">
+    <button type="button" class="category active"
+            data-category="all" aria-pressed="true">
+      Все
+    </button>
+
+    <button type="button" class="category"
+            data-category="pizza" aria-pressed="false">
+      Пицца
+    </button>
+
+    <button type="button" class="category"
+            data-category="burger" aria-pressed="false">
+      Бургеры
+    </button>
+
+    <button type="button" class="category"
+            data-category="sushi" aria-pressed="false">
+      Суши
+    </button>
+  </div>
+
+  <section id="restaurants">
+    <h2 class="h4 mb-4">Рестораны рядом</h2>
+
+    <div class="row g-4">
+
+      <div class="col-md-4 restaurant-column" data-category="burger">
+        <article class="restaurant">
+          <div class="restaurant-cover">Urban Burger</div>
+
+          <div class="restaurant-info">
+            <h3>Urban Burger</h3>
+            <p>Бургеры · Американская кухня</p>
+            <p>Рейтинг: 4,8 · 20–30 минут</p>
+            <p>Доставка: 400 ₸</p>
+
+            <details>
+              <summary>Посмотреть меню</summary>
+              <ul>
+                <li>Чизбургер — 1 800 ₸</li>
+                <li>Картофель фри — 900 ₸</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-4 restaurant-column" data-category="pizza">
+        <article class="restaurant">
+          <div class="restaurant-cover">Casa Pizza</div>
+
+          <div class="restaurant-info">
+            <h3>Casa Pizza</h3>
+            <p>Пицца · Итальянская кухня</p>
+            <p>Рейтинг: 4,7 · 25–35 минут</p>
+            <p>Доставка: 500 ₸</p>
+
+            <details>
+              <summary>Посмотреть меню</summary>
+              <ul>
+                <li>Маргарита — 2 500 ₸</li>
+                <li>Пепперони — 2 900 ₸</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+      </div>
+
+      <div class="col-md-4 restaurant-column" data-category="sushi">
+        <article class="restaurant">
+          <div class="restaurant-cover">Nori Sushi</div>
+
+          <div class="restaurant-info">
+            <h3>Nori Sushi</h3>
+            <p>Суши · Японская кухня</p>
+            <p>Рейтинг: 4,9 · 30–40 минут</p>
+            <p>Доставка: 600 ₸</p>
+
+            <details>
+              <summary>Посмотреть меню</summary>
+              <ul>
+                <li>Филадельфия — 3 200 ₸</li>
+                <li>Сет на двоих — 6 900 ₸</li>
+              </ul>
+            </details>
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </section>
+
+  <p class="text-muted small mt-4">
+    (Тестовые рестораны и цены. Оформление заказа пока не подключено.)
+  </p>
+
+</div>
+
+<script>
+  const buttons = document.querySelectorAll(".category");
+  const restaurants = document.querySelectorAll(".restaurant-column");
+
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function () {
+      const category = button.dataset.category;
+
+      buttons.forEach(function (item) {
+        const selected = item === button;
+
+        item.classList.toggle("active", selected);
+        item.setAttribute("aria-pressed", selected);
+      });
+
+      restaurants.forEach(function (restaurant) {
+        restaurant.hidden =
+          category !== "all" &&
+          restaurant.dataset.category !== category;
+      });
+    });
+  });
+</script>
+
+{% endblock %}
